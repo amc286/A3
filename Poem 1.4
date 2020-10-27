@@ -1,0 +1,89 @@
+Eye[] eyes = new Eye[10];
+PFont f;
+String message1 = "I bet these men love it most";
+String message2 = "when you get tired";
+String message3 = "because they get tired, too.";
+
+class Eye{
+ float x,y;
+ float blinkCnt,counter;
+ float RightBtm,LeftBtm;
+ float RightTop, LeftTop;
+ float delay;
+ float eyeWidth,eyeHeight,pupilWidth;
+ 
+ Eye(){
+   eyeWidth = 125; 
+   eyeHeight = 50;
+   pupilWidth = 0.875*eyeHeight;
+   x = random(-width/2 + eyeWidth, width/2 - eyeWidth);
+   y = random(-height/2 + eyeHeight,height/2 - eyeHeight);
+   delay = 30; 
+   blinkCnt = 0;
+ }
+  
+ void create(){
+   strokeWeight(5);
+   fill(255,255,255);
+   ellipse(x,y,eyeWidth,eyeHeight); //Outer Eye
+  
+   fill(0);
+   ellipse(x,y,pupilWidth,pupilWidth); //Pupil
+   
+
+   RightTop = map(blinkCnt,0, delay, PI+HALF_PI, PI+PI);
+   LeftTop = map(blinkCnt,0,delay, PI+HALF_PI, PI);
+   
+
+   RightBtm = map(blinkCnt, 0, delay, HALF_PI, 0);
+   LeftBtm = map(blinkCnt, 0, delay, HALF_PI, PI);
+   
+
+   strokeWeight(0);
+   fill(255,240,240);
+   arc(x,y,eyeWidth,eyeHeight,LeftTop,RightTop,CHORD);
+   arc(x,y,eyeWidth,eyeHeight,RightBtm,LeftBtm,CHORD);  
+   
+   
+ }
+ 
+ void blink(){
+   if(blinkCnt==0){
+     counter = 1;
+   }
+   if(blinkCnt==delay){
+     counter = -1;
+   }
+   blinkCnt += counter;
+ }
+
+}
+
+void setup(){
+  size(626,438);
+  background(255);
+  //smooth();
+  //eye1 = new Eye();
+  f = createFont("OpenDyslexic",20,true);
+  for(int i=0;i<eyes.length;i++){
+    eyes[i] = new Eye();
+  }
+}
+
+void draw(){
+  background(0);
+  translate(width/2,height/2);
+  
+  for(int i=0;i<eyes.length;i++){
+    eyes[i].create();
+    float isToBlink = random(0,1);
+    if(isToBlink >= 0.5 ) eyes[i].blink();
+  
+  fill(255);
+  textFont(f);                   
+  textAlign(LEFT);            
+  text(message1,-250,-180);
+  text(message2,-250,-160);
+  text(message3,-250,180);
+  }
+}
