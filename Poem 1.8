@@ -1,0 +1,26 @@
+PImage stars;
+PImage telescope;
+PImage stickmen;
+PImage bg;
+PFont f;
+String message1 = "Oh darling, now they’re building a telescope!";
+String message2 = "Do you think they can see me?";
+String message3 = "Clearly?";
+
+void setup() {
+  size(626,438);
+  bg = loadImage("stars.jpg");
+  f = createFont("OpenDyslexic",20,true);  
+  telescope = loadImage("telescope.png");
+  stickmen = loadImage("stickmen.png");
+}
+
+void draw() {
+  background(bg);
+  image(telescope, 250, 150);
+  image(stickmen, 150, 150);
+  textFont(f);
+  text(message1, 10, 40);
+  text(message2, 260, 400);
+  text(message3, 280, 420);
+}
