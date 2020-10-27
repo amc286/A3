@@ -1,0 +1,37 @@
+String[] headlines = {
+  "When you press your palms against your eyes,", 
+  "do they see the sparks of light", 
+  "and create new names for stars?", 
+};
+
+PFont f;  
+float x;  
+int index = 0;
+
+void setup() {
+  f = createFont("OpenDyslexic", 50, true);  
+  x = width; 
+  size(626, 438);
+  background(0);
+  noStroke();
+}
+
+void draw() {
+  textFont(f, 16);        
+  textAlign(LEFT);
+  text(headlines[index], x, 219); 
+
+  x = x - 1.75;
+
+  float w = textWidth(headlines[index]);
+  if (x < -w) {
+    x = width; 
+    index = (index + 1) % headlines.length;
+  }
+
+  fill(0, 40);
+  rect(0, 0, width, height);
+
+  fill(255);
+  ellipse(random(width), random(height), 4, 4);
+}
