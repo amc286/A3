@@ -1,0 +1,58 @@
+String message = " Does it hurt?";
+PFont f;
+float r = 100;
+float lineLength = width/5; 
+PImage stickmen;
+
+int number_letters = 1;
+
+void setup() {
+  size(680, 480);
+  f = createFont("OpenDyslexic", 30, true);
+  textFont(f);
+  textAlign(CENTER);
+  smooth();
+  stickmen = loadImage("stick men.png");
+}
+
+void draw() {
+  background(0);
+  ellipse(340,250,150,130);
+  fill(0);
+  ellipse(340,250, 60, 60);
+  image(stickmen, 306, 220);
+
+  translate(width/2, height/2);
+  noFill();
+  stroke(0);
+  ellipse(0, 0, r*2, r*2);
+
+
+  float arclength = 0;
+
+  number_letters = constrain(number_letters, 0, message.length());
+
+  for (int i = 0; i < number_letters; i++)
+  {
+    char currentChar = message.charAt(i);
+    float w = textWidth(currentChar);
+
+    arclength += w/1.25;
+    float theta = PI + arclength / r;    
+    pushMatrix();
+    translate(r*cos(theta), r*sin(theta));
+    rotate(theta+PI/2);
+    fill(255);
+    text(currentChar, 0, 0);
+    popMatrix();
+    arclength += w/2;
+  }
+}
+
+void mousePressed() {
+  if ( mouseButton == LEFT ) {
+    number_letters++;
+  } else {
+    number_letters--;
+  }
+}
