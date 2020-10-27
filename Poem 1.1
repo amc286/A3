@@ -1,0 +1,18 @@
+PFont f;
+String message = "stand still";
+
+void setup() {
+  size(626, 438);
+  f = createFont("OpenDyslexic",20,true);
+}
+
+void draw() { 
+  background(0);
+  fill(255);
+  textFont(f);                  
+  translate(width/2,height/2);  
+  
+  textAlign(CENTER);            
+  text(message,0,0);            
+  
+}
