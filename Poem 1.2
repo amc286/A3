@@ -1,0 +1,25 @@
+String text1 = "I don't want to alarm you but";
+PFont f;
+int counter;
+ 
+void setup() {
+  size(626, 483);
+  frameRate(5);
+  smooth();
+  f = createFont("OpenDyslexic", 48);
+  textFont(f, 20);
+}
+ 
+void draw() {
+ 
+  background(0);
+  fill(255);
+  typewriteText();
+ 
+}
+ 
+void typewriteText(){
+  if (counter < text1.length())
+    counter++;
+  text(text1.substring(0, counter), 135, 219, width, height);
+}
